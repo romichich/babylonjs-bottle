@@ -81,8 +81,8 @@
         camera.lowerBetaLimit = 0;
         camera.panningAxis = new BABYLON.Vector3(0, 0, 0);
         camera.attachControl(canvas, true);
-
-        env.lighting = BABYLON.CubeTexture.CreateFromPrefilteredData("/assets/env/hamburg_hbf.env", scene);
+      
+        env.lighting = BABYLON.CubeTexture.CreateFromPrefilteredData("https://romichich.github.io/babylonjs-bottle/assets/env/hamburg_hbf.env", scene);
         env.lighting.name = "hamburg_hbf";
         env.lighting.gammaSpace = false;
         env.lighting.rotationY = BABYLON.Tools.ToRadians(0);
@@ -91,7 +91,7 @@
         env.skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:1000.0}, scene);
         env.skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
         env.skyboxMaterial.backFaceCulling = false; 
-        env.skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("https://github.com/romichich/babylonjs-bottle/assets/skybox/hamburg", scene);
+        env.skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("https://romichich.github.io/babylonjs-bottle/assets/skybox/hamburg", scene);
         env.skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
         env.skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
         env.skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
@@ -106,7 +106,7 @@
     const bottle = {};
     const table = {};
     async function loadMeshes() {
-        bottle.file = await BABYLON.SceneLoader.AppendAsync("https://raw.githubusercontent.com/romichich/babylonjs-bottle/refs/heads/main/assets/gltf/sodaBottle.gltf");
+        bottle.file = await BABYLON.SceneLoader.AppendAsync("https://romichich.github.io/babylonjs-bottle/assets/gltf/sodaBottle.gltf");
         bottle.glass = scene.getMeshByName("sodaBottle_low");
         bottle.liquid = scene.getMeshByName("soda_low");
         bottle.root = bottle.glass.parent;
@@ -114,7 +114,7 @@
         bottle.liquid.alphaIndex = 1;
         bottle.glassLabels = bottle.glass.clone("glassLabels");
         bottle.glassLabels.alphaIndex = 0;
-        table.file = await BABYLON.SceneLoader.AppendAsync("/assets/gltf/table.gltf");
+        table.file = await BABYLON.SceneLoader.AppendAsync("https://romichich.github.io/babylonjs-bottle/assets/gltf/table.gltf");
         table.mesh = scene.getMeshByName("table_low");
         bottle.root.position = new BABYLON.Vector3(-0.09, 0.0, -0.09);
         bottle.root.rotation = new BABYLON.Vector3(0.0, 4.0, 0.0);
@@ -125,9 +125,9 @@
         let textures = [];
         return new Promise((resolve, reject) => {
             let textureUrls = [
-                "/assets/gltf/sodaBottleMat_thickness.png",
-                "/assets/gltf/sodaMat_thickness.png",
-                "/assets/gltf/sodaBottleMat_translucency.png"
+                "https://romichich.github.io/babylonjs-bottle/assets/gltf/sodaBottleMat_thickness.png",
+                "https://romichich.github.io/babylonjs-bottle/assets/gltf/sodaMat_thickness.png",
+                "https://romichich.github.io/babylonjs-bottle/assets/gltf/sodaBottleMat_translucency.png"
             ];
 
             for (let url of textureUrls) {
@@ -205,11 +205,11 @@
     const liquidParameters = {};
     async function createMaterials() {
         sodaMats.bottle = new BABYLON.NodeMaterial("sodaBottleMat", scene, { emitComments: false });
-        await sodaMats.bottle.loadAsync("/assets/shaders/glassShader.json");
+        await sodaMats.bottle.loadAsync("https://romichich.github.io/babylonjs-bottle/assets/shaders/glassShader.json");
         sodaMats.bottle.build(false);
 
         sodaMats.liquid = new BABYLON.NodeMaterial("sodaMat", scene, { emitComments: false });
-        await sodaMats.liquid.loadAsync("/assets/shaders/sodaShader.json");
+        await sodaMats.liquid.loadAsync("https://romichich.github.io/babylonjs-bottle/assets/shaders/sodaShader.json");
         sodaMats.liquid.build(false);
 
         sodaMats.glassLabels = sodaMats.bottle.clone("glassLabelsMat");
