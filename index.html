@@ -90,8 +90,8 @@
 
         env.skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:1000.0}, scene);
         env.skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
-        env.skyboxMaterial.backFaceCulling = false;
-        env.skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("/assets/skybox/hamburg", scene);
+        env.skyboxMaterial.backFaceCulling = false; 
+        env.skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("https://github.com/romichich/babylonjs-bottle/assets/skybox/hamburg", scene);
         env.skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
         env.skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
         env.skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
@@ -106,7 +106,7 @@
     const bottle = {};
     const table = {};
     async function loadMeshes() {
-        bottle.file = await BABYLON.SceneLoader.AppendAsync("/assets/gltf/sodaBottle.gltf");
+        bottle.file = await BABYLON.SceneLoader.AppendAsync("https://raw.githubusercontent.com/romichich/babylonjs-bottle/refs/heads/main/assets/gltf/sodaBottle.gltf");
         bottle.glass = scene.getMeshByName("sodaBottle_low");
         bottle.liquid = scene.getMeshByName("soda_low");
         bottle.root = bottle.glass.parent;
