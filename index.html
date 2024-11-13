@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <title>Babylon.js sample code</title>
+        <title>Зачилься другалёк</title>
 
         <!-- Babylon.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
@@ -81,7 +81,7 @@
     { once: true },
     );
     // Load the sound and play it automatically once ready
-    var music = new BABYLON.Sound("Music", "https://romichich.github.io/babylonjs-bottle/assets/audio/piwas_railstation.mp3", scene, null, { loop: true, autoplay: true, spatialSound: true, distanceModel: "linear",rolloffFactor: 2, maxDistance: 4,});
+    var music = new BABYLON.Sound("Music", "/assets/audio/piwas_railstation.mp3", scene, null, { loop: true, autoplay: true, spatialSound: true, distanceModel: "linear",rolloffFactor: 2, maxDistance: 4,});
     music.setPosition(new BABYLON.Vector3(0.5, 0, 0.5));
     // create camera and lights for scene
 
@@ -91,8 +91,8 @@
         const camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(0), BABYLON.Tools.ToRadians(70), 0.5, new BABYLON.Vector3(0.0, 0.1, 0.0), scene);
         camera.minZ = 0.01;
         camera.wheelDeltaPercentage = 0.01;
-        camera.upperRadiusLimit = 0.5;
-        camera.lowerRadiusLimit = 0.25;
+        camera.upperRadiusLimit = 0.75;
+        camera.lowerRadiusLimit = 0.35;
         camera.upperBetaLimit = 1.575;
         camera.lowerBetaLimit = 0;
         camera.panningAxis = new BABYLON.Vector3(0, 0, 0);
@@ -132,7 +132,7 @@
         bottle.glassLabels.alphaIndex = 0;
         table.file = await BABYLON.SceneLoader.AppendAsync("https://romichich.github.io/babylonjs-bottle/assets/gltf/table.gltf");
         table.mesh = scene.getMeshByName("table_low");
-        bottle.root.position = new BABYLON.Vector3(-0.09, 0.0, -0.09);
+        bottle.root.position = new BABYLON.Vector3(-0.03, 0.0, -0.03);
         bottle.root.rotation = new BABYLON.Vector3(0.0, 4.0, 0.0);
         lights.dirLight.includedOnlyMeshes.push(table.mesh);	        
     }
