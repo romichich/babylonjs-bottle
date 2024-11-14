@@ -73,7 +73,7 @@
     // Unlock audio on first user interaction.
 
     window.addEventListener(
-    "click",
+    "pointerdown",
     () => {
         music.play();
         if (!BABYLON.Engine.audioEngine.unlocked) {
