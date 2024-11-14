@@ -68,23 +68,34 @@
     var scene = new BABYLON.Scene(engine);
     engine.displayLoadingUI();  
 
-    // Disable the default audio unlock button
-    BABYLON.Engine.audioEngine.useCustomUnlockedButton = true;
-    // Unlock audio on first user interaction.
-
-    window.addEventListener(
-    "pointerdown",
-    () => {
-        music.play();
-        if (!BABYLON.Engine.audioEngine.unlocked) {
-        BABYLON.Engine.audioEngine.unlock();
+    //
+    const audioContext = new AudioContext;
+    const audio = new Audio("https://romichich.github.io/babylonjs-bottle/assets/audio/piwas_railstation.mp3");
+    const source = audioContext.createMediaElementSource(audio);
+    source.connect(audioContext.destination);
+    
+    window.addEventListener("touchstart", () => {
+        if (audioContext.state === "suspended") {
+                audioContext.resume();
         }
-    },
-    { once: true },
+        audio.play();
+    }
+    ,{ once: true },
     );
+
+    window.addEventListener("click", () => {
+        console.log(audioContext);
+            if (audioContext.state === "suspended") {
+                audioContext.resume();
+            }
+            audio.play();
+        }
+        ,{ once: true },
+    );
+    
     // Load the sound and play it automatically once ready
-    var music = new BABYLON.Sound("Music", "https://romichich.github.io/babylonjs-bottle/assets/audio/piwas_railstation.mp3", scene, null, { loop: true, autoplay: false, spatialSound: true, distanceModel: "linear",rolloffFactor: 2, maxDistance: 4,});
-    music.setPosition(new BABYLON.Vector3(0.5, 0, 0.5));
+    // var music = new BABYLON.Sound("Music", "https://romichich.github.io/babylonjs-bottle/assets/audio/piwas_railstation.mp3", scene, null, { loop: true, autoplay: false, spatialSound: true, distanceModel: "linear",rolloffFactor: 2, maxDistance: 4,});
+    // music.setPosition(new BABYLON.Vector3(0.5, 0, 0.5));
     // create camera and lights for scene
 
     const lights = {};
