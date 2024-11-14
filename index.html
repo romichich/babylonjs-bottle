@@ -64,40 +64,27 @@
         var sceneToRender = null;
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
         var createScene = async function () {
+
     // This creates a basic Babylon Scene object (non-mesh)
     var scene = new BABYLON.Scene(engine);
     engine.displayLoadingUI();  
 
-    //
-    const audioContext = new AudioContext;
-    const audio = new Audio("https://romichich.github.io/babylonjs-bottle/assets/audio/piwas_railstation.mp3");
-    const source = audioContext.createMediaElementSource(audio);
-    source.connect(audioContext.destination);
-    
-    window.addEventListener("touchstart", () => {
-        if (audioContext.state === "suspended") {
-                audioContext.resume();
-        }
-        audio.play();
-    }
-    ,{ once: true },
-    );
+    // Load the sound
+    var music = new BABYLON.Sound("Music", "https://romichich.github.io/babylonjs-bottle/assets/audio/piwas_railstation.mp3", scene, null, { loop: true, autoplay: false, spatialSound: true, distanceModel: "linear",rolloffFactor: 2, maxDistance: 4,});
+    music.setPosition(new BABYLON.Vector3(0.5, 0, 0.5));
 
+    //Handling autoplay & unlocking audio on first user interaction 
+    BABYLON.Engine.audioEngine.useCustomUnlockedButton = true;
     window.addEventListener("click", () => {
-        console.log(audioContext);
-            if (audioContext.state === "suspended") {
-                audioContext.resume();
-            }
-            audio.play();
+        if (!BABYLON.Engine.audioEngine.unlocked) {
+            BABYLON.Engine.audioEngine.unlock();
+        }
+        music.play();
         }
         ,{ once: true },
     );
-    
-    // Load the sound and play it automatically once ready
-    // var music = new BABYLON.Sound("Music", "https://romichich.github.io/babylonjs-bottle/assets/audio/piwas_railstation.mp3", scene, null, { loop: true, autoplay: false, spatialSound: true, distanceModel: "linear",rolloffFactor: 2, maxDistance: 4,});
-    // music.setPosition(new BABYLON.Vector3(0.5, 0, 0.5));
-    // create camera and lights for scene
 
+    // create camera and lights for scene
     const lights = {};
     const env = {};
     async function initScene() {
