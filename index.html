@@ -77,8 +77,7 @@
     }
     
     // Load the sound
-    var music = new BABYLON.Sound("Music", "https://romichich.github.io/babylonjs-bottle/assets/audio/piwas_railstation.mp3", scene, null, { loop: true, autoplay: false, spatialSound: true, distanceModel: "linear",rolloffFactor: 2, maxDistance: 4,});
-    music.setPosition(new BABYLON.Vector3(0.5, 0, 0.5));
+    var music = new BABYLON.Sound("Music", "https://romichich.github.io/babylonjs-bottle/assets/audio/piwas_railstation.mp3", scene, null, { loop: true, autoplay: false});
 
     //Handling autoplay & unlocking audio on first user interaction 
     BABYLON.Engine.audioEngine.useCustomUnlockedButton = true;
@@ -109,7 +108,7 @@
         const camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(0), BABYLON.Tools.ToRadians(70), 0.5, new BABYLON.Vector3(0.0, 0.1, 0.0), scene);
         camera.minZ = 0.01;
         camera.wheelDeltaPercentage = 0.01;
-        camera.upperRadiusLimit = 0.75;
+        camera.upperRadiusLimit = 0.45;
         camera.lowerRadiusLimit = 0.35;
         camera.upperBetaLimit = 1.575;
         camera.lowerBetaLimit = 0;
